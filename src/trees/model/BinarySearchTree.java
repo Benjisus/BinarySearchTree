@@ -63,17 +63,9 @@ public class BinarySearchTree<T extends Comparable<T>>
 	}
 	
 	/**
-	 * Calculates the number of nodes held in this tree.
+	 * Iteratively prints out a level order traversal of the tree to the console.
 	 */
-	public int size()
-	{
-		return size(root);
-	}
-	
-	/**
-	 * Prints out a level order traversal of the tree to the console
-	 */
-	public void levelOrder()
+	public void levelorderIterative()
 	{
 		ListQueue<TreeNode> q = new ListQueue<TreeNode>(); //queue to hold calls
 		
@@ -94,36 +86,33 @@ public class BinarySearchTree<T extends Comparable<T>>
 	}
 	
 	/**
-	 * Prints an in-order traversal of the tree to the console.
+	 * Iteratively prints an in-order traversal of this tree
 	 */
-	public void inOrder()
+	public void inorderIterative()
 	{
-		ListStack<TreeNode> stack = new ListStack<TreeNode>();
+		ListStack<TreeNode> stack = new ListStack<TreeNode>(); //stack to guide traversal
 		
-		if(root != null)
-		{
-			stack.push(root);
-		}
+		TreeNode current = root; //pointer to the active node.
 		
-		while(!stack.isEmpty())
+		//continue until stack is empty, or current is null
+		while(!stack.isEmpty() || current != null)
 		{
-			
+			//if not null, push to stack, descend to left
+			if(current != null)
+			{
+				stack.push(current);
+				current = current.left;
+			}
+			else //can't go further left, print active node, descend to the right.
+			{
+				TreeNode node = stack.pop();
+				System.out.print(node.data + ", ");
+				current = node.right;
+			}
 		}
 	}
 	
 	//-----------------Inner Methods-----------------------------------------------------
-
-	/**
-	 * Recursively determines the number of nodes held in the tree.
-	 * @param node node to start counting from
-	 */
-	private int size(TreeNode node)
-	{
-		if(node == null) //base case, don't count this node
-			return 0;
-		
-		return 1 + size(node.left) + size(node.right); //count this node, recursively move to right and left
-	}
 	
 	/**
 	 * Recursively inserts the given data into the list.
@@ -232,8 +221,98 @@ public class BinarySearchTree<T extends Comparable<T>>
 			}
 		}
 	}
+	//-----------------------------------Given Methods-----------------------------------
 	
-	//----------------------------------------------------------------------
+	/**
+	 * Determines the size of this tree
+	 */
+	public int size() 
+	{
+        return size(root);
+    }
+	/**
+	 * Recursively counts every node held in this tree.
+	 */
+    private int size(TreeNode n) {
+        if (n == null) return 0;
+        return 1 + size(n.left) + size(n.right);
+    }
+    
+    /**
+     * Determines the height of this tree.
+     * @return
+     */
+    public int height() {
+        return height(root);
+    }
+    /**
+     * Recursively measures the length of the deepest path length.
+     */
+    private int height(TreeNode n) {
+        if (n == null) return 0;
+        return 1 + Math.max(height(n.left), height(n.right));
+    }
+    
+    /**
+     * prints a preorder traversal of this tree to the console.
+     * Uses the recursive version
+     */
+    public void preorder() {
+        System.out.println("preorder: ");
+        preorder(root);
+        System.out.println(" ");
+    }
+    /**
+     * Recursively prints a preorder traversal of this tree.
+     */
+    private void preorder(TreeNode n) {
+        if (n == null) return;
+        System.out.print(n.data + ", ");
+        preorder(n.left);
+        preorder(n.right);
+    }
+    
+    /**
+     * Prints an inorder traversal of this tree to the console.
+     * Uses the recursive version of this method
+     */
+    public void inorder() {
+        System.out.println("inorder: ");
+        inorder(root);
+        System.out.println(" ");
+    }
+    /**
+     * Recursively prints an inorder traversal of this tree
+     * @param n
+     */
+    private void inorder(TreeNode n) {
+        if (n == null) return;
+        inorder(n.left);
+        System.out.print(n.data + ", ");
+        inorder(n.right);
+        
+    }
+
+    /**
+     * Prints a postorder traversal of this tree to the console.
+     * Uses the recursive version of this method.
+     */
+    public void postorder() {
+        System.out.println("postorder: ");
+        postorder(root);
+        System.out.println(" ");
+    }
+    /**
+     * Recursively prints a postorder traversal of this tree.
+     */
+    private void postorder(TreeNode n) {
+        if (n == null) return;
+        postorder(n.left);
+        postorder(n.right);
+        System.out.print(n.data + ", ");
+    }
+	
+	//------------------------------TreeNode Class----------------------------------------
 	/**
 	 * This class represents a single node held in the tree.
 	 * Tampering with the pointers could mess up the structure of the tree.

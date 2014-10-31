@@ -11,13 +11,11 @@ public class Test
 		tree.insert(50);
 		tree.insert(25);
 		tree.insert(75);
-		tree.insert(10);
+		tree.insert(0);
+		tree.insert(100);
 		tree.insert(90);
-		tree.insert(15);
-		tree.insert(85);
+		tree.insert(10);
 		
-		//tree.remove(85);
-		
-		tree.levelOrder();
+		tree.inorderIterative();
 	}
 }
