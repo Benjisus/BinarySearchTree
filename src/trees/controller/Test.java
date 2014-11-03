@@ -8,7 +8,7 @@ public class Test
 {
 	public static void main(String[] args)
 	{
-		timeSort(100000, 1);
+		timeSort(1000000, 1);
 	}
 	
 	/**
@@ -35,7 +35,7 @@ public class Test
 				tree.insert(list.remove(0));//add number onto the tree
 			}
 			
-			tree.inorderIterative(); //print an inorder traversal of the tree.
+			tree.inorder(); //print an inorder traversal of the tree.
 			long endTime = System.nanoTime();//--------------End Timing-----------------------
 			long timeTaken = endTime - startTime; //determine how long this sort took.
 			

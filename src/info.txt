@@ -1,0 +1,13 @@
+Name:           			Taylor Hogge
+CADE Username:  			hogge
+Index web page: 			http://www.eng.utah.edu/~hogge/cs2420
+Nickname for grading spreadsheet: 	thogge
+email: 					hoggetaylor@gmail.com
+
+-------------------------------------------------------------------------
+
+Name:           			Ben Hammond
+CADE Username:  			Bhammond
+Index web page: 			http://www.eng.utah.edu/~hogge/sc2420
+Nickname for grading spreadsheet: 	Bham
+email: 					B.hammond203@gmail.com

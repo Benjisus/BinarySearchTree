@@ -4,7 +4,7 @@ import stack.model.ListQueue;
 import stack.model.ListStack;
 
 /**
- * @author Taylor Hogge
+ * @author Taylor Hogge, Ben Hammond
  * @param <T> a comparable type
  * 
  * This class represents a binary search tree. You should insert and remove data
@@ -110,6 +110,75 @@ public class BinarySearchTree<T extends Comparable<T>>
 				current = node.right;
 			}
 		}
+	}
+	
+	/**
+	 * Iteratively prints a postorder traversal of this tree to the console.
+	 */
+	public void postorderIterative()
+	{
+		if(root == null)
+		{
+			return;			
+		}
+			
+		ListStack<TreeNode> stack = new ListStack<TreeNode>();
+		TreeNode node = root;
+		
+		while(!stack.isEmpty() || node != null)
+		{
+			while(node !=null)
+			{
+				if(node.right != null)
+				{
+					stack.push(node.right);
+				}
+			}
+			
+			node = stack.pop();
+				
+			if(node.right != null && !stack.isEmpty())
+			{
+				TreeNode nodeRight = stack.pop();
+				stack.push(node);
+				node = node.right;
+			}
+			else
+			{
+				System.out.print(node.data + " ");
+				node = null;
+			}
+				
+		}
+	}
+	    
+	/**
+	 * Iteratively prints a preorder traversal of this tree to the console.
+	 */
+	public void preorderIterative()
+	{
+	    if(root == null)
+	    {
+	    	return;
+	    }
+	    	
+	    ListStack<TreeNode> stack = new ListStack<TreeNode>();
+	    stack.push(root);
+	    	
+	    while(!stack.isEmpty())
+	    {
+	    	TreeNode node = stack.pop();
+	    	System.out.print(node.data + " ");
+	    		
+	    	if(node.right != null)
+	    	{
+	    		stack.push(node.right);
+	    	}
+	    	if(node.left != null)
+	    	{
+	    		stack.push(node.left);
+	    	}
+	    }
 	}
 	
 	//-----------------Inner Methods-----------------------------------------------------
